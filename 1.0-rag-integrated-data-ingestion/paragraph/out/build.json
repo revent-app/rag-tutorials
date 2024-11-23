@@ -3,7 +3,7 @@
   "events": {},
   "integrations": {
     "slack": {
-      "id": "c7b730b5-6ba3-4b9b-b87e-c6a204340d35",
+      "id": "f8113956-1678-4fa2-a58b-53d240497b04",
       "name": "slack",
       "workflows": {
         "9fda5b17-67d6-4d59-bd73-d3e51809a45a": {
@@ -11,7 +11,7 @@
           "name": "Paragon Tutorial - New Message Sync",
           "steps": [
             {
-              "id": "b8ef2a88-b95e-460a-9e1d-829456ede3b8",
+              "id": "2889c077-8590-47e7-bdfe-a74bc0df9a0e",
               "type": "TRIGGER/ACTION",
               "parameters": {
                 "intent": "SLACK_TRIGGER_CHANNEL_MESSAGE_POSTED",
@@ -19,14 +19,14 @@
                 "credentials": [],
                 "actionParameters": []
               },
-              "next": "3131da5c-714c-4ba2-9a97-9db412ea53bc",
+              "next": "0230264a-de20-4958-aa75-0d96152accb1",
               "_migrations": {
                 "name": "triggerStep"
               },
               "description": "description"
             },
             {
-              "id": "3131da5c-714c-4ba2-9a97-9db412ea53bc",
+              "id": "0230264a-de20-4958-aa75-0d96152accb1",
               "type": "ACTION/FUNCTION",
               "parameters": {
                 "parameters": [
@@ -34,7 +34,7 @@
                     "key": "message",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "b8ef2a88-b95e-460a-9e1d-829456ede3b8",
+                      "stepId": "2889c077-8590-47e7-bdfe-a74bc0df9a0e",
                       "path": [
                         "result"
                       ],
@@ -45,14 +45,14 @@
                 "code": "function yourFunction(params, libraries) {\n                const message = params.message;\n                if (params.error) {\n                    return;\n                }\n                else if (message.type === 'message' && !message.subtype) {\n                    return { text: message.text, channel: message.channel };\n                }\n                else {\n                    return;\n                }\n            }",
                 "retryOnFailure": false
               },
-              "next": "26f5de1f-c922-4cc4-8c58-3687cf4550df",
+              "next": "c3c01ac9-1ced-4dee-a531-deaf219edc3f",
               "_migrations": {
                 "name": "parseMessageStep"
               },
               "description": "Parse Message"
             },
             {
-              "id": "26f5de1f-c922-4cc4-8c58-3687cf4550df",
+              "id": "c3c01ac9-1ced-4dee-a531-deaf219edc3f",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -71,7 +71,7 @@
                                 "operator": "$exists",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "3131da5c-714c-4ba2-9a97-9db412ea53bc",
+                                  "stepId": "0230264a-de20-4958-aa75-0d96152accb1",
                                   "path": [
                                     "result"
                                   ],
@@ -85,7 +85,7 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "bc0f449b-210a-4b8e-8020-ac5c86a796a6"
+                    "next": "5e835171-696f-4314-8313-6bec54e7bc34"
                   },
                   {
                     "isDefault": true,
@@ -100,7 +100,7 @@
               "description": "Message isn't empty?"
             },
             {
-              "id": "bc0f449b-210a-4b8e-8020-ac5c86a796a6",
+              "id": "5e835171-696f-4314-8313-6bec54e7bc34",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -139,7 +139,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "3131da5c-714c-4ba2-9a97-9db412ea53bc",
+                          "stepId": "0230264a-de20-4958-aa75-0d96152accb1",
                           "path": [
                             "result",
                             "text"
@@ -157,7 +157,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "3131da5c-714c-4ba2-9a97-9db412ea53bc",
+                          "stepId": "0230264a-de20-4958-aa75-0d96152accb1",
                           "path": [
                             "result",
                             "channel"
@@ -182,17 +182,17 @@
           "name": "Paragon Tutorial - Initial Channel Sync",
           "steps": [
             {
-              "id": "7f09c257-fec4-4ba4-946b-a77418ed606d",
+              "id": "34802440-42df-40cd-a570-4929a90a3b3a",
               "type": "TRIGGER/INTEGRATION_ENABLED",
               "parameters": {},
-              "next": "677b9526-602c-4cb5-929f-7444017b82b8",
+              "next": "d09d7618-c219-47e9-b920-02e9062f5e87",
               "_migrations": {
                 "name": "triggerStep"
               },
               "description": "description"
             },
             {
-              "id": "677b9526-602c-4cb5-929f-7444017b82b8",
+              "id": "d09d7618-c219-47e9-b920-02e9062f5e87",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "slack",
@@ -223,19 +223,19 @@
                 "headers": [],
                 "body": []
               },
-              "next": "cd526331-3c9a-4ddd-8774-a8b096647223",
+              "next": "9a2e4e03-c0a8-4233-bf36-27eda55c0c88",
               "_migrations": {
                 "name": "integrationRequestStep"
               },
               "description": "Get All Channels"
             },
             {
-              "id": "cd526331-3c9a-4ddd-8774-a8b096647223",
+              "id": "9a2e4e03-c0a8-4233-bf36-27eda55c0c88",
               "type": "TRANSITION/MAP",
               "parameters": {
                 "iterator": {
                   "type": "VARIABLE",
-                  "stepId": "677b9526-602c-4cb5-929f-7444017b82b8",
+                  "stepId": "d09d7618-c219-47e9-b920-02e9062f5e87",
                   "path": [
                     "response",
                     "body",
@@ -243,7 +243,7 @@
                   ],
                   "dataType": "ARRAY"
                 },
-                "nextToIterate": "54b762ee-1d27-4412-98af-6ad4c61ab813"
+                "nextToIterate": "2759ed9a-ad00-4509-9259-427f699db7a2"
               },
               "next": null,
               "_migrations": {
@@ -252,7 +252,7 @@
               "description": "For each channel"
             },
             {
-              "id": "54b762ee-1d27-4412-98af-6ad4c61ab813",
+              "id": "2759ed9a-ad00-4509-9259-427f699db7a2",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "slack",
@@ -271,7 +271,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "cd526331-3c9a-4ddd-8774-a8b096647223",
+                      "stepId": "9a2e4e03-c0a8-4233-bf36-27eda55c0c88",
                       "path": [
                         "instance",
                         "id"
@@ -289,7 +289,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "cd526331-3c9a-4ddd-8774-a8b096647223",
+                          "stepId": "9a2e4e03-c0a8-4233-bf36-27eda55c0c88",
                           "path": [
                             "instance",
                             "id"
@@ -302,14 +302,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "22dba890-21e3-4b19-87ff-8eccb5551953",
+              "next": "55c93f30-346f-449a-8dd5-9df9c8f7f347",
               "_migrations": {
                 "name": "integrationRequestStep1"
               },
               "description": "Get Conversation History"
             },
             {
-              "id": "22dba890-21e3-4b19-87ff-8eccb5551953",
+              "id": "55c93f30-346f-449a-8dd5-9df9c8f7f347",
               "type": "ACTION/FUNCTION",
               "parameters": {
                 "parameters": [
@@ -317,7 +317,7 @@
                     "key": "messages",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "54b762ee-1d27-4412-98af-6ad4c61ab813",
+                      "stepId": "2759ed9a-ad00-4509-9259-427f699db7a2",
                       "path": [
                         "response",
                         "body",
@@ -330,7 +330,7 @@
                     "key": "error",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "54b762ee-1d27-4412-98af-6ad4c61ab813",
+                      "stepId": "2759ed9a-ad00-4509-9259-427f699db7a2",
                       "path": [
                         "response",
                         "body",
@@ -343,7 +343,7 @@
                     "key": "channel",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "cd526331-3c9a-4ddd-8774-a8b096647223",
+                      "stepId": "9a2e4e03-c0a8-4233-bf36-27eda55c0c88",
                       "path": [
                         "instance",
                         "name"
@@ -355,14 +355,14 @@
                 "code": "function yourFunction(params, libraries) {\n                const messages = params.messages;\n                if (!Array.isArray(messages) || params.error) {\n                    return;\n                }\n                const parsedMessages = [];\n                messages.forEach((message) => {\n                    if (message.type === 'message' && !message.subtype) {\n                        parsedMessages.push({\n                            text: message.text,\n                            channel: params.channel,\n                        });\n                    }\n                });\n                return parsedMessages;\n            }",
                 "retryOnFailure": false
               },
-              "next": "4b9176c2-0c19-4f7f-b6c4-47fb0e383ab3",
+              "next": "cb08e447-70da-4b7d-bcce-841a91bb613a",
               "_migrations": {
                 "name": "functionStep"
               },
               "description": "Parse Message JSON"
             },
             {
-              "id": "4b9176c2-0c19-4f7f-b6c4-47fb0e383ab3",
+              "id": "cb08e447-70da-4b7d-bcce-841a91bb613a",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -381,7 +381,7 @@
                                 "operator": "$exists",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "22dba890-21e3-4b19-87ff-8eccb5551953",
+                                  "stepId": "55c93f30-346f-449a-8dd5-9df9c8f7f347",
                                   "path": [
                                     "result"
                                   ],
@@ -395,7 +395,7 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "9ff54731-8083-48ba-b669-c7b4a68a7b23"
+                    "next": "29ffafe5-a759-49ec-a78a-31126fcf43fb"
                   },
                   {
                     "isDefault": true,
@@ -410,18 +410,18 @@
               "description": "Check Array"
             },
             {
-              "id": "9ff54731-8083-48ba-b669-c7b4a68a7b23",
+              "id": "29ffafe5-a759-49ec-a78a-31126fcf43fb",
               "type": "TRANSITION/MAP",
               "parameters": {
                 "iterator": {
                   "type": "VARIABLE",
-                  "stepId": "22dba890-21e3-4b19-87ff-8eccb5551953",
+                  "stepId": "55c93f30-346f-449a-8dd5-9df9c8f7f347",
                   "path": [
                     "result"
                   ],
                   "dataType": "ARRAY"
                 },
-                "nextToIterate": "0a9c115c-f950-45e0-ad4d-69b45e76a40b"
+                "nextToIterate": "62ac9702-f177-442b-bee5-87bd84849c54"
               },
               "next": null,
               "_migrations": {
@@ -430,7 +430,7 @@
               "description": "For each message"
             },
             {
-              "id": "0a9c115c-f950-45e0-ad4d-69b45e76a40b",
+              "id": "62ac9702-f177-442b-bee5-87bd84849c54",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -469,7 +469,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "9ff54731-8083-48ba-b669-c7b4a68a7b23",
+                          "stepId": "29ffafe5-a759-49ec-a78a-31126fcf43fb",
                           "path": [
                             "instance",
                             "text"
@@ -487,7 +487,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "9ff54731-8083-48ba-b669-c7b4a68a7b23",
+                          "stepId": "29ffafe5-a759-49ec-a78a-31126fcf43fb",
                           "path": [
                             "instance",
                             "channel"
@@ -509,7 +509,7 @@
         }
       },
       "config": {
-        "id": "3e7bfe97-5228-4894-8e1c-167002f6793a",
+        "id": "bc735644-9f1c-47d9-824f-0271f45e739c",
         "values": {
           "paragonLink": true,
           "description": "Send notifications to Slack",
@@ -539,7 +539,7 @@
       }
     },
     "notion": {
-      "id": "ec1ba774-8f29-4d1c-b1c6-42a040a550a9",
+      "id": "75ef7ef8-233e-4259-8c87-403f6705ad37",
       "name": "notion",
       "workflows": {
         "9dacef6a-082f-4583-8baf-33e42f24a0d4": {
@@ -547,7 +547,7 @@
           "name": "Paragon Tutorial - Send Notion Contents to API",
           "steps": [
             {
-              "id": "a3c41e82-2dc3-440f-889b-42dcfae2bcbc",
+              "id": "090e304a-fa1a-4960-ba82-05f6993647bb",
               "type": "TRIGGER/ACTION",
               "parameters": {
                 "intent": "NOTION_TRIGGER_PAGE_UPDATED",
@@ -555,14 +555,14 @@
                 "credentials": [],
                 "actionParameters": []
               },
-              "next": "43dbd762-dfba-49e1-9e0b-a054471a54d4",
+              "next": "f71b5785-542e-4481-b69f-6d7267e629c7",
               "_migrations": {
                 "name": "triggerStep"
               },
               "description": "description"
             },
             {
-              "id": "43dbd762-dfba-49e1-9e0b-a054471a54d4",
+              "id": "f71b5785-542e-4481-b69f-6d7267e629c7",
               "type": "ACTION/CUSTOM",
               "parameters": {
                 "intent": "NOTION_GET_PAGE_CONTENT",
@@ -578,7 +578,7 @@
                         {
                           "dataType": "ANY",
                           "type": "VARIABLE",
-                          "stepId": "a3c41e82-2dc3-440f-889b-42dcfae2bcbc",
+                          "stepId": "090e304a-fa1a-4960-ba82-05f6993647bb",
                           "path": [
                             "result",
                             "id"
@@ -591,14 +591,14 @@
                 "ignoreFailure": false,
                 "retryOnFailure": false
               },
-              "next": "c14592e5-3a55-4ee9-9851-dca6b06c1a3d",
+              "next": "41ded498-03df-4b13-827f-842faf886c91",
               "_migrations": {
                 "name": "actionStep"
               },
               "description": "Get Page Contents"
             },
             {
-              "id": "c14592e5-3a55-4ee9-9851-dca6b06c1a3d",
+              "id": "41ded498-03df-4b13-827f-842faf886c91",
               "type": "ACTION/FUNCTION",
               "parameters": {
                 "parameters": [
@@ -606,7 +606,7 @@
                     "key": "blocks",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "43dbd762-dfba-49e1-9e0b-a054471a54d4",
+                      "stepId": "f71b5785-542e-4481-b69f-6d7267e629c7",
                       "path": [
                         "result"
                       ],
@@ -617,7 +617,7 @@
                     "key": "url",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "a3c41e82-2dc3-440f-889b-42dcfae2bcbc",
+                      "stepId": "090e304a-fa1a-4960-ba82-05f6993647bb",
                       "path": [
                         "result",
                         "url"
@@ -629,14 +629,14 @@
                 "code": "function parseNotionPage(parameters) {\n                if (!Array.isArray(parameters.blocks)) {\n                    console.error('Invalid notion data provided. Expected an array.');\n                    return [];\n                }\n                const parsedContent = [];\n                parameters.blocks.forEach((block) => {\n                    const blockType = block.type;\n                    if (blockType === 'heading_3') {\n                        const headingContent = block.heading_3.rich_text[0].plain_text;\n                        parsedContent.push(`<h3>${headingContent}</h3>`);\n                    }\n                    else if (blockType === 'paragraph') {\n                        const paragraphContent = block.paragraph.rich_text\n                            .map((text) => text.plain_text)\n                            .join(' ');\n                        parsedContent.push(`<p>${paragraphContent}</p>`);\n                    }\n                    else if (blockType === 'child_page') {\n                        const childPageTitle = block.child_page.title;\n                        parsedContent.push(`<h2>${childPageTitle}</h2>`);\n                    }\n                });\n                return { text: parsedContent.join('\\n'), url: parameters.url };\n            }",
                 "retryOnFailure": false
               },
-              "next": "022855dc-6e54-4ad0-a373-3b5e2f935006",
+              "next": "c1718083-022d-42d5-99cc-a2f8942b6f79",
               "_migrations": {
                 "name": "parseContentsStep"
               },
               "description": "Parse Contents"
             },
             {
-              "id": "022855dc-6e54-4ad0-a373-3b5e2f935006",
+              "id": "c1718083-022d-42d5-99cc-a2f8942b6f79",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -675,7 +675,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "c14592e5-3a55-4ee9-9851-dca6b06c1a3d",
+                          "stepId": "41ded498-03df-4b13-827f-842faf886c91",
                           "path": [
                             "result",
                             "text"
@@ -693,7 +693,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "c14592e5-3a55-4ee9-9851-dca6b06c1a3d",
+                          "stepId": "41ded498-03df-4b13-827f-842faf886c91",
                           "path": [
                             "result",
                             "url"
@@ -715,7 +715,7 @@
         }
       },
       "config": {
-        "id": "f2faf6d2-2e1e-4851-a03c-fdff9be9c2f6",
+        "id": "013819c0-c7dd-4746-ac66-820e239a2b75",
         "values": {
           "paragonLink": false,
           "description": "Connect your Notion workspace",
@@ -737,7 +737,7 @@
       }
     },
     "googledrive": {
-      "id": "029ac807-8e98-4bf9-b1be-7084ad9d749e",
+      "id": "36c3fe23-aca9-42e0-a788-89bdeb1a7ac4",
       "name": "googledrive",
       "workflows": {
         "e9a7bbd5-b0a8-4ea3-9ba0-d56e62805a97": {
@@ -745,7 +745,7 @@
           "name": "RAG Tutorial - Sync New Files",
           "steps": [
             {
-              "id": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+              "id": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
               "type": "TRIGGER/ACTION",
               "parameters": {
                 "intent": "GOOGLE_DRIVE_TRIGGER_FILE_CREATED",
@@ -753,14 +753,14 @@
                 "credentials": [],
                 "actionParameters": []
               },
-              "next": "5f33f96a-48a6-485b-9858-68499c5d82b8",
+              "next": "fceb996b-ec44-481b-9e8b-564787917910",
               "_migrations": {
                 "name": "triggerStep"
               },
               "description": "description"
             },
             {
-              "id": "5f33f96a-48a6-485b-9858-68499c5d82b8",
+              "id": "fceb996b-ec44-481b-9e8b-564787917910",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -779,7 +779,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                                  "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -805,7 +805,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                                  "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -831,7 +831,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                                  "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -851,12 +851,12 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "7a926be2-581e-4aef-81db-3766da2fef3e"
+                    "next": "d4e99dbe-0118-4788-9fd9-1a4155fdb2ce"
                   },
                   {
                     "isDefault": true,
                     "label": "No",
-                    "next": "a4d36966-fea9-49fd-9879-70b8d3c1c417"
+                    "next": "3dcf0e83-c4e3-42f2-837e-50bb6d1b2a68"
                   }
                 ]
               },
@@ -867,7 +867,7 @@
               "description": "Check if Google Workspace File"
             },
             {
-              "id": "7a926be2-581e-4aef-81db-3766da2fef3e",
+              "id": "d4e99dbe-0118-4788-9fd9-1a4155fdb2ce",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -886,7 +886,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                                  "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -906,12 +906,12 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "80ce3c68-d61b-4f75-a9d4-fefb7e2f6a22"
+                    "next": "7610afb2-c1c1-4001-9b45-0e733d05f48f"
                   },
                   {
                     "isDefault": true,
                     "label": "No",
-                    "next": "bea95972-5434-4854-8478-a09003e09e26"
+                    "next": "62a44747-9f23-41d1-ae97-9981c8086e84"
                   }
                 ]
               },
@@ -922,7 +922,7 @@
               "description": "Check if spreadsheet"
             },
             {
-              "id": "80ce3c68-d61b-4f75-a9d4-fefb7e2f6a22",
+              "id": "7610afb2-c1c1-4001-9b45-0e733d05f48f",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -941,7 +941,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                      "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                       "path": [
                         "result",
                         "id"
@@ -967,14 +967,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "46b7c0c9-19ef-4284-8b0c-645e0b638b45",
+              "next": "a7fe243b-8c3f-41bc-9fdb-2db688631f46",
               "_migrations": {
                 "name": "integrationRequestStep"
               },
               "description": "Get Google Sheets"
             },
             {
-              "id": "46b7c0c9-19ef-4284-8b0c-645e0b638b45",
+              "id": "a7fe243b-8c3f-41bc-9fdb-2db688631f46",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -1013,7 +1013,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "80ce3c68-d61b-4f75-a9d4-fefb7e2f6a22",
+                          "stepId": "7610afb2-c1c1-4001-9b45-0e733d05f48f",
                           "path": [
                             "response",
                             "body"
@@ -1031,7 +1031,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                          "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                           "path": [
                             "result",
                             "name"
@@ -1049,7 +1049,7 @@
               "description": "Send contents to backend"
             },
             {
-              "id": "bea95972-5434-4854-8478-a09003e09e26",
+              "id": "62a44747-9f23-41d1-ae97-9981c8086e84",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -1068,7 +1068,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                      "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                       "path": [
                         "result",
                         "id"
@@ -1094,14 +1094,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "536c22e8-0c86-43a9-88ce-ac8ac8764e7c",
+              "next": "35255e34-dc4d-4a12-b2c3-a9a82c8919df",
               "_migrations": {
                 "name": "integrationRequestStep1"
               },
               "description": "Get Google Doc or Slides"
             },
             {
-              "id": "536c22e8-0c86-43a9-88ce-ac8ac8764e7c",
+              "id": "35255e34-dc4d-4a12-b2c3-a9a82c8919df",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -1140,7 +1140,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "bea95972-5434-4854-8478-a09003e09e26",
+                          "stepId": "62a44747-9f23-41d1-ae97-9981c8086e84",
                           "path": [
                             "response",
                             "body"
@@ -1158,7 +1158,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                          "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                           "path": [
                             "result",
                             "name"
@@ -1176,7 +1176,7 @@
               "description": "Send contents to backend"
             },
             {
-              "id": "a4d36966-fea9-49fd-9879-70b8d3c1c417",
+              "id": "3dcf0e83-c4e3-42f2-837e-50bb6d1b2a68",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -1195,7 +1195,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "1b73ad6f-39d9-4f16-8d83-c825d6b6bdbd",
+                      "stepId": "e8080281-8dfb-42ce-92fd-d714da1f0ecb",
                       "path": [
                         "result",
                         "id"
@@ -1221,14 +1221,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "ddf75ed2-4c8a-4efb-8a8a-77875f9deeef",
+              "next": "5e095f5d-a034-4cbb-b75f-2c1473a92aab",
               "_migrations": {
                 "name": "integrationRequestStep2"
               },
               "description": "Get Non-Google Native File"
             },
             {
-              "id": "ddf75ed2-4c8a-4efb-8a8a-77875f9deeef",
+              "id": "5e095f5d-a034-4cbb-b75f-2c1473a92aab",
               "type": "ACTION/FUNCTION",
               "parameters": {
                 "parameters": [
@@ -1236,7 +1236,7 @@
                     "key": "file",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "a4d36966-fea9-49fd-9879-70b8d3c1c417",
+                      "stepId": "3dcf0e83-c4e3-42f2-837e-50bb6d1b2a68",
                       "path": [
                         "response",
                         "body"
@@ -1248,14 +1248,14 @@
                 "code": "function yourFunction(param, libraries) {\n                var buffer = libraries.Buffer;\n                const fileData = param.file.data;\n                const fileType = param.file.mimeType;\n                return ('data:' + fileType + ';base64,' + buffer.from(fileData, 'hex').toString('base64'));\n            }",
                 "retryOnFailure": false
               },
-              "next": "2139fbdb-567f-4f38-bbd5-d3b1cd95d1d8",
+              "next": "4bffb1bb-7809-44a9-a62d-c8c3d0ac405d",
               "_migrations": {
                 "name": "functionStep"
               },
               "description": "Convert to base64 format"
             },
             {
-              "id": "2139fbdb-567f-4f38-bbd5-d3b1cd95d1d8",
+              "id": "4bffb1bb-7809-44a9-a62d-c8c3d0ac405d",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -1294,7 +1294,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "ddf75ed2-4c8a-4efb-8a8a-77875f9deeef",
+                          "stepId": "5e095f5d-a034-4cbb-b75f-2c1473a92aab",
                           "path": [
                             "result"
                           ]
@@ -1318,7 +1318,7 @@
           "name": "RAG Tutorial - Sync File Updates",
           "steps": [
             {
-              "id": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+              "id": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
               "type": "TRIGGER/ACTION",
               "parameters": {
                 "intent": "GOOGLE_DRIVE_TRIGGER_FILE_UPDATED",
@@ -1326,14 +1326,14 @@
                 "credentials": [],
                 "actionParameters": []
               },
-              "next": "4a62f844-15d3-4518-bc5d-5bc49f879806",
+              "next": "98bb56a9-953b-4ce3-a01b-59f620a10175",
               "_migrations": {
                 "name": "triggerStep"
               },
               "description": "description"
             },
             {
-              "id": "4a62f844-15d3-4518-bc5d-5bc49f879806",
+              "id": "98bb56a9-953b-4ce3-a01b-59f620a10175",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -1352,7 +1352,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                                  "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -1378,7 +1378,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                                  "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -1404,7 +1404,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                                  "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -1424,12 +1424,12 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "d51a424d-9d58-4613-954a-bbe15407d958"
+                    "next": "a3a0acd0-d97a-4be8-8d1f-5031071fafb0"
                   },
                   {
                     "isDefault": true,
                     "label": "No",
-                    "next": "ae13456f-8262-4b5d-b852-e8374ce08b1b"
+                    "next": "a331aa46-8657-453b-a8a5-ebc26cc6483d"
                   }
                 ]
               },
@@ -1440,7 +1440,7 @@
               "description": "Check if Google Workspace File"
             },
             {
-              "id": "d51a424d-9d58-4613-954a-bbe15407d958",
+              "id": "a3a0acd0-d97a-4be8-8d1f-5031071fafb0",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -1459,7 +1459,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                                  "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                                   "path": [
                                     "result",
                                     "mimeType"
@@ -1479,12 +1479,12 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "c94d5fc7-a565-44f0-8a28-7e3b82bca170"
+                    "next": "3585b93d-abfc-4348-b01d-cb9b12e42106"
                   },
                   {
                     "isDefault": true,
                     "label": "No",
-                    "next": "e9276e30-2ec2-4e6c-90e5-4735072248b4"
+                    "next": "6411d5d7-6e63-4d34-bba7-cddc8fe5f582"
                   }
                 ]
               },
@@ -1495,7 +1495,7 @@
               "description": "Check if spreadsheet"
             },
             {
-              "id": "c94d5fc7-a565-44f0-8a28-7e3b82bca170",
+              "id": "3585b93d-abfc-4348-b01d-cb9b12e42106",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -1514,7 +1514,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                      "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                       "path": [
                         "result",
                         "id"
@@ -1540,14 +1540,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "247f6109-e2d5-4bc7-b6e4-e576bd17c090",
+              "next": "3eb1a993-cd7b-4ebb-98e7-6871f07d2c27",
               "_migrations": {
                 "name": "integrationRequestStep"
               },
               "description": "Get Google Sheets"
             },
             {
-              "id": "247f6109-e2d5-4bc7-b6e4-e576bd17c090",
+              "id": "3eb1a993-cd7b-4ebb-98e7-6871f07d2c27",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -1586,7 +1586,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "c94d5fc7-a565-44f0-8a28-7e3b82bca170",
+                          "stepId": "3585b93d-abfc-4348-b01d-cb9b12e42106",
                           "path": [
                             "response",
                             "body"
@@ -1604,7 +1604,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                          "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                           "path": [
                             "result",
                             "name"
@@ -1622,7 +1622,7 @@
               "description": "Send contents to backend"
             },
             {
-              "id": "e9276e30-2ec2-4e6c-90e5-4735072248b4",
+              "id": "6411d5d7-6e63-4d34-bba7-cddc8fe5f582",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -1641,7 +1641,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                      "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                       "path": [
                         "result",
                         "id"
@@ -1667,14 +1667,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "4f7d5311-5858-4820-8123-aee5bbbaef84",
+              "next": "9c500d12-227f-423d-93e1-305f86637c8f",
               "_migrations": {
                 "name": "integrationRequestStep1"
               },
               "description": "Get Google Doc or Slides"
             },
             {
-              "id": "4f7d5311-5858-4820-8123-aee5bbbaef84",
+              "id": "9c500d12-227f-423d-93e1-305f86637c8f",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -1713,7 +1713,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "e9276e30-2ec2-4e6c-90e5-4735072248b4",
+                          "stepId": "6411d5d7-6e63-4d34-bba7-cddc8fe5f582",
                           "path": [
                             "response",
                             "body"
@@ -1731,7 +1731,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                          "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                           "path": [
                             "result",
                             "name"
@@ -1749,7 +1749,7 @@
               "description": "Send contents to backend"
             },
             {
-              "id": "ae13456f-8262-4b5d-b852-e8374ce08b1b",
+              "id": "a331aa46-8657-453b-a8a5-ebc26cc6483d",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -1768,7 +1768,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "323057b4-3acc-451e-8791-9ab0ca3bdb23",
+                      "stepId": "1d1e3f6a-dabb-4d05-8718-619f95384de1",
                       "path": [
                         "result",
                         "id"
@@ -1794,14 +1794,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "4e56d5c5-d105-44f7-bbc6-29e2db4ac111",
+              "next": "89c01f94-8e66-4087-b4d5-bbd22018b8bc",
               "_migrations": {
                 "name": "integrationRequestStep2"
               },
               "description": "Get Non-Google Native File"
             },
             {
-              "id": "4e56d5c5-d105-44f7-bbc6-29e2db4ac111",
+              "id": "89c01f94-8e66-4087-b4d5-bbd22018b8bc",
               "type": "ACTION/FUNCTION",
               "parameters": {
                 "parameters": [
@@ -1809,7 +1809,7 @@
                     "key": "file",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "ae13456f-8262-4b5d-b852-e8374ce08b1b",
+                      "stepId": "a331aa46-8657-453b-a8a5-ebc26cc6483d",
                       "path": [
                         "response",
                         "body"
@@ -1821,14 +1821,14 @@
                 "code": "function yourFunction(param, libraries) {\n                var buffer = libraries.Buffer;\n                const fileData = param.file.data;\n                const fileType = param.file.mimeType;\n                return ('data:' + fileType + ';base64,' + buffer.from(fileData, 'hex').toString('base64'));\n            }",
                 "retryOnFailure": false
               },
-              "next": "30200812-8ab4-4569-8d01-bd5fe73048cb",
+              "next": "776d4349-a287-4d04-8865-1a54a7f5fd87",
               "_migrations": {
                 "name": "functionStep"
               },
               "description": "Convert to base64 format"
             },
             {
-              "id": "30200812-8ab4-4569-8d01-bd5fe73048cb",
+              "id": "776d4349-a287-4d04-8865-1a54a7f5fd87",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -1867,7 +1867,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "4e56d5c5-d105-44f7-bbc6-29e2db4ac111",
+                          "stepId": "89c01f94-8e66-4087-b4d5-bbd22018b8bc",
                           "path": [
                             "result"
                           ]
@@ -1891,17 +1891,17 @@
           "name": "RAG Tutorial - Sync current files",
           "steps": [
             {
-              "id": "c82eca32-bd30-4a6a-8f73-3473150415fb",
+              "id": "9895411b-ec71-40a1-bdc5-6fbc7df7e2af",
               "type": "TRIGGER/INTEGRATION_ENABLED",
               "parameters": {},
-              "next": "4cfb44d6-302c-441d-90a2-7b40a9a93c50",
+              "next": "04fe85ab-5782-4fd2-b3c4-453e8bfe5403",
               "_migrations": {
                 "name": "triggerStep"
               },
               "description": "description"
             },
             {
-              "id": "4cfb44d6-302c-441d-90a2-7b40a9a93c50",
+              "id": "04fe85ab-5782-4fd2-b3c4-453e8bfe5403",
               "type": "ACTION/CUSTOM",
               "parameters": {
                 "intent": "GOOGLE_DRIVE_LIST_FILES",
@@ -1935,25 +1935,25 @@
                 "ignoreFailure": false,
                 "retryOnFailure": false
               },
-              "next": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+              "next": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
               "_migrations": {
                 "name": "actionStep"
               },
               "description": "Get files in shared folder"
             },
             {
-              "id": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+              "id": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
               "type": "TRANSITION/MAP",
               "parameters": {
                 "iterator": {
                   "type": "VARIABLE",
-                  "stepId": "4cfb44d6-302c-441d-90a2-7b40a9a93c50",
+                  "stepId": "04fe85ab-5782-4fd2-b3c4-453e8bfe5403",
                   "path": [
                     "result"
                   ],
                   "dataType": "ARRAY"
                 },
-                "nextToIterate": "12b61c0c-b3e2-4272-822a-5714e5e03ad1"
+                "nextToIterate": "ed05c67b-6097-4fd9-bf34-e8ea417c02b4"
               },
               "next": null,
               "_migrations": {
@@ -1962,7 +1962,7 @@
               "description": "For each file"
             },
             {
-              "id": "12b61c0c-b3e2-4272-822a-5714e5e03ad1",
+              "id": "ed05c67b-6097-4fd9-bf34-e8ea417c02b4",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -1981,7 +1981,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                                  "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                                   "path": [
                                     "instance",
                                     "mimeType"
@@ -2007,7 +2007,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                                  "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                                   "path": [
                                     "instance",
                                     "mimeType"
@@ -2033,7 +2033,7 @@
                                 "operator": "$stringContains",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                                  "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                                   "path": [
                                     "instance",
                                     "mimeType"
@@ -2053,12 +2053,12 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "d0065d1c-eecf-408c-ac3a-8c06dc4fcbd1"
+                    "next": "ea4e89c0-9007-4b98-8277-e24f5c3bdfe6"
                   },
                   {
                     "isDefault": true,
                     "label": "No",
-                    "next": "53c19e5c-cbe3-432a-8faf-255ac960f94d"
+                    "next": "cc05c205-d15c-46ce-8e86-6cde701ef05c"
                   }
                 ]
               },
@@ -2069,7 +2069,7 @@
               "description": "Check if Google Workspace File"
             },
             {
-              "id": "d0065d1c-eecf-408c-ac3a-8c06dc4fcbd1",
+              "id": "ea4e89c0-9007-4b98-8277-e24f5c3bdfe6",
               "type": "TRANSITION/IFELSE",
               "parameters": {
                 "choices": [
@@ -2088,7 +2088,7 @@
                                 "operator": "$stringExactlyMatches",
                                 "variable": {
                                   "type": "VARIABLE",
-                                  "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                                  "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                                   "path": [
                                     "instance",
                                     "mimeType"
@@ -2108,12 +2108,12 @@
                     },
                     "isDefault": false,
                     "label": "Yes",
-                    "next": "294d61e7-6d1d-477c-b07e-999fc76a2798"
+                    "next": "6598898d-310e-41c0-806e-19875886c02a"
                   },
                   {
                     "isDefault": true,
                     "label": "No",
-                    "next": "e12bbd71-0d42-49c9-9d29-b80d6eaf63bc"
+                    "next": "eb54d946-7704-4c89-9eb7-568b0d541556"
                   }
                 ]
               },
@@ -2124,7 +2124,7 @@
               "description": "Check if spreadsheet"
             },
             {
-              "id": "294d61e7-6d1d-477c-b07e-999fc76a2798",
+              "id": "6598898d-310e-41c0-806e-19875886c02a",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -2143,7 +2143,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                      "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                       "path": [
                         "instance",
                         "id"
@@ -2169,14 +2169,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "4e4d06b4-ad1e-4c04-acb3-ab2799d5aeac",
+              "next": "85de2501-a41e-4ade-a1f1-68eac716dbc4",
               "_migrations": {
                 "name": "integrationRequestStep"
               },
               "description": "Get text from google sheets"
             },
             {
-              "id": "4e4d06b4-ad1e-4c04-acb3-ab2799d5aeac",
+              "id": "85de2501-a41e-4ade-a1f1-68eac716dbc4",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -2215,7 +2215,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "294d61e7-6d1d-477c-b07e-999fc76a2798",
+                          "stepId": "6598898d-310e-41c0-806e-19875886c02a",
                           "path": [
                             "response",
                             "body"
@@ -2233,7 +2233,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                          "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                           "path": [
                             "instance",
                             "name"
@@ -2251,7 +2251,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                          "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                           "path": [
                             "instance",
                             "id"
@@ -2277,7 +2277,7 @@
               "description": "Send text to backend"
             },
             {
-              "id": "e12bbd71-0d42-49c9-9d29-b80d6eaf63bc",
+              "id": "eb54d946-7704-4c89-9eb7-568b0d541556",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -2296,7 +2296,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                      "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                       "path": [
                         "instance",
                         "id"
@@ -2322,14 +2322,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "c8ce24e9-42e7-48a1-b821-b8d3908f5749",
+              "next": "51e9a2c7-ba73-4d1c-afaf-4c12a23c7b73",
               "_migrations": {
                 "name": "integrationRequestStep1"
               },
               "description": "Get text from google doc or slides"
             },
             {
-              "id": "c8ce24e9-42e7-48a1-b821-b8d3908f5749",
+              "id": "51e9a2c7-ba73-4d1c-afaf-4c12a23c7b73",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -2368,7 +2368,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "e12bbd71-0d42-49c9-9d29-b80d6eaf63bc",
+                          "stepId": "eb54d946-7704-4c89-9eb7-568b0d541556",
                           "path": [
                             "response",
                             "body"
@@ -2386,7 +2386,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                          "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                           "path": [
                             "instance",
                             "name"
@@ -2404,7 +2404,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                          "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                           "path": [
                             "instance",
                             "id"
@@ -2430,7 +2430,7 @@
               "description": "Send text to backend"
             },
             {
-              "id": "53c19e5c-cbe3-432a-8faf-255ac960f94d",
+              "id": "cc05c205-d15c-46ce-8e86-6cde701ef05c",
               "type": "ACTION/CUSTOM_INTEGRATION_REQUEST",
               "parameters": {
                 "actionType": "googledrive",
@@ -2449,7 +2449,7 @@
                     {
                       "dataType": "STRING",
                       "type": "VARIABLE",
-                      "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                      "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                       "path": [
                         "instance",
                         "id"
@@ -2483,14 +2483,14 @@
                 "headers": [],
                 "body": []
               },
-              "next": "2c73e989-7302-4a77-85af-551c4ebb0a11",
+              "next": "20b4ec74-e507-42f2-9128-a24e8906c19e",
               "_migrations": {
                 "name": "integrationRequestStep2"
               },
               "description": "Get from non Google doc"
             },
             {
-              "id": "2c73e989-7302-4a77-85af-551c4ebb0a11",
+              "id": "20b4ec74-e507-42f2-9128-a24e8906c19e",
               "type": "ACTION/FUNCTION",
               "parameters": {
                 "parameters": [
@@ -2498,7 +2498,7 @@
                     "key": "file",
                     "source": {
                       "type": "VARIABLE",
-                      "stepId": "53c19e5c-cbe3-432a-8faf-255ac960f94d",
+                      "stepId": "cc05c205-d15c-46ce-8e86-6cde701ef05c",
                       "path": [
                         "response",
                         "body"
@@ -2510,14 +2510,14 @@
                 "code": "function yourFunction(param, libraries) {\n                var buffer = libraries.Buffer;\n                const fileData = param.file.data;\n                const fileType = param.file.mimeType;\n                return ('data:' + fileType + ';base64,' + buffer.from(fileData, 'hex').toString('base64'));\n            }",
                 "retryOnFailure": false
               },
-              "next": "ff5128d0-25ff-40bc-823d-8d3d13ef726f",
+              "next": "871ce060-61a8-4770-abd2-4c23e6d94cdd",
               "_migrations": {
                 "name": "functionStep"
               },
               "description": "Convert file data"
             },
             {
-              "id": "ff5128d0-25ff-40bc-823d-8d3d13ef726f",
+              "id": "871ce060-61a8-4770-abd2-4c23e6d94cdd",
               "type": "ACTION/REQUEST",
               "parameters": {
                 "bodyType": "json",
@@ -2556,7 +2556,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "2c73e989-7302-4a77-85af-551c4ebb0a11",
+                          "stepId": "20b4ec74-e507-42f2-9128-a24e8906c19e",
                           "path": [
                             "result"
                           ]
@@ -2573,7 +2573,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                          "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                           "path": [
                             "instance",
                             "id"
@@ -2591,7 +2591,7 @@
                         {
                           "dataType": "STRING",
                           "type": "VARIABLE",
-                          "stepId": "f6fa6f70-01a2-451c-bc2a-85dd932521c0",
+                          "stepId": "ee0af6be-aa9c-4b4c-9753-f4a3a7fad679",
                           "path": [
                             "instance",
                             "name"
@@ -2621,7 +2621,7 @@
         }
       },
       "config": {
-        "id": "2eece4e3-0294-4308-8a37-2ad417fbd27f",
+        "id": "3900c542-67f6-467d-945e-91227c0e43be",
         "values": {
           "paragonLink": false,
           "description": "Save files to Google Drive",
@@ -2668,7 +2668,7 @@
       }
     }
   },
-  "projectId": "e8969b09-7602-4258-a5e6-d396f049b636",
+  "projectId": "ac767a64-8602-4fcc-b9d0-e23baf64bb56",
   "persona": {
     "meta": {}
   },

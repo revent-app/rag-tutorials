@@ -1,74 +1,70 @@
-import React, { useState } from "react";
+"use client";
+
+import { useAuth0 } from "@auth0/auth0-react";
 import { AuthenticatedConnectUser, paragon } from "@useparagon/connect";
+import React, { useEffect, useState } from "react";
 
 interface ChildProps {
-  setUser: (user: AuthenticatedConnectUser) => void
+  setUser: (user: AuthenticatedConnectUser) => void;
 }
 
-const Login: React.FC<ChildProps> = (props) => {
-  const [email, setEmail] = useState<string>("null");
-  const [password,setPassword] = useState<string>("");
+export const Login: React.FC<ChildProps> = (props) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const { loginWithRedirect, isAuthenticated, getIdTokenClaims, isLoading } =
+    useAuth0();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {id , value} = e.target;
-    if(id === "email"){
-      setEmail(value);
-    }
-    if(id === "password"){
-      setPassword(value);
-    }
-  }
-
-  const handleSubmit = async () => {
-    const usr = {
-      usernameOrEmail: email,
-      password: password
-    }
-    fetch(process.env.NEXT_PUBLIC_AUTH_BACKEND ?? "", {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(usr)
-    }).then(function (data) {
-      data.json().then((response) => {
-        if (response.accessToken) {
-          paragon.authenticate(process.env.NEXT_PUBLIC_PARAGON_PROJECT_ID ?? "", response.accessToken);
-          sessionStorage.setItem("jwt", response.accessToken);
-          const usr = paragon.getUser();
-          if(usr.authenticated){
-            props.setUser(usr);
-          }
-        } else {
-          setErrorMessage("Login Unsuccessful");
+  const handleAuthentication = async () => {
+    try {
+      const claims = await getIdTokenClaims();
+      if (claims) {
+        paragon.authenticate(
+          process.env.NEXT_PUBLIC_PARAGON_PROJECT_ID ?? "",
+          claims.__raw,
+        );
+        sessionStorage.setItem("jwt", claims.__raw);
+        const usr = paragon.getUser();
+        if (usr.authenticated) {
+          props.setUser(usr);
         }
-      })
-    }).catch(() => setErrorMessage("Login Unsuccessful"))
+      } else {
+        setErrorMessage("Login Unsuccessful");
+      }
+    } catch (error) {
+      console.error("Authentication error:", error);
+      setErrorMessage("Login Unsuccessful");
+    }
   };
 
+  useEffect(() => {
+    // Only attempt authentication if we're authenticated and not loading
+    if (isAuthenticated && !isLoading) {
+      handleAuthentication();
+    }
+  }, [isAuthenticated, isLoading]);
 
-  return(
+  if (isLoading) {
+    return (
+      <div className="w-2/3 p-4 px-10 text-center flex flex-col space-y-2 bg-white shadow-2xl rounded-2xl">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return (
     <div className="w-2/3 p-4 px-10 text-center flex flex-col space-y-2 bg-white shadow-2xl rounded-2xl">
-        <h2 className="font-sans font-bold mb-2 text-lg">Log In</h2>
-        <p className="mb-2 max-2-sm font-sans font-light text-gray-600">
-          Log in to your account to access your Paragon integrations
-        </p>
-        <input type="email" id="email"
-               className="h-1 w-full p-6 mb-2 border border-gray-300 rounded-md placeholder:font-sans placeholder:font-light"
-               placeholder="Email" onChange={(e) => handleInputChange(e)}/>
-        <input type="password" id="password"
-               className="h-1 w-full p-6 mb-2 border border-gray-300 rounded-md placeholder:font-sans placeholder:font-light"
-               placeholder="Password"
-               onChange={(e) => handleInputChange(e)}/>
-        {errorMessage !== "" && <div className="text-red-700 my-2"> {errorMessage} </div>}
-          <button
-            className="shrink h-1 flex justify-center items-center p-6 space-x-4 font-sans font-bold text-white rounded-md shadow-lg px-9 bg-cyan-700 shadow-cyan-100
-                    hover:bg-opacity-90 shadow-sm hover:shadow-lg border transition hover:-translate-y-0.5 duration-150"
-            onClick={() => handleSubmit()} type="submit">Login
-          </button>
+      <h2 className="font-sans font-bold mb-2 text-lg">Log In</h2>
+      <p className="mb-2 max-2-sm font-sans font-light text-gray-600">
+        Log in to your account to access your Paragon integrations
+      </p>
+      <button
+        onClick={() => loginWithRedirect()}
+        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+      >
+        Log In
+      </button>
+      {errorMessage && <div className="text-red-700 my-2">{errorMessage}</div>}
     </div>
   );
-}
+};
+
 export default Login;
